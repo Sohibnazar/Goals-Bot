@@ -27,3 +27,10 @@ def add_goal(description, deadline):
     conn.commit()
     conn.close()
 
+# 2) Добавление подзадачи
+def add_task(goal_id, description, deadline):
+    conn = sqlite3.connect("goals.db")
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO tasks (goal_id, description, deadline) VALUES (?, ?, ?)", (goal_id, description, deadline))
+    conn.commit()
+    conn.close()
