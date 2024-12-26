@@ -9,8 +9,10 @@ init_db()
 # Команда /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "Привет! Я помогу вам отслеживать цели. Используйте команды:\n"
-        "/add_goal - Добавить цель\n"
+        "<b>Привет! 🎯 Я помогу вам отслеживать цели. Используйте команды:</b>\n"
+         "\n"
+        "➕ <b>/add_goal   -   Добавить цель </b>\n",
+        parse_mode='HTML'
     )
 
 # Команда /add_goal
@@ -20,10 +22,23 @@ async def add_goal_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         description_1 = context.args[1]
         deadline = context.args[2]
         add_goal(description, deadline)
-        await update.message.reply_text(f"Цель '{description} {description_1}' добавлена с дедлайном {deadline}!")
+        await update.message.reply_text(
+            f"🎯 <b> Цель успешно добавлена! </b>\n"
+            f"🔹<b> **Описание:** </b>{description} {description_1}\n"
+            f"📅 <b> **Дедлайн:**</b> {deadline}\n"
+            "<b> Вы можете отслеживать её с помощью команды /view_goals.</b>",
+            parse_mode='HTML'
+        )
     except:
-        await update.message.reply_text("Используйте формат: /add_goal   'Описание'    YYYY-MM-DD")
-
+        await update.message.reply_text(
+            "📜 <b>Пожалуйста, используйте правильный формат для добавления цели:</b>\n"
+            "\n"
+            "➕ <b>/add_goal   'Описание цели'   'YYYY-MM-DD'</b>\n"
+            "\n"
+            "<b><i>💡 Пример:</i></b>\n"
+            "       <b>/add_goal    'Изучить Python'    '2024-12-31'</b>",
+            parse_mode='HTML'
+        )
 
 
 # Запуск бота
