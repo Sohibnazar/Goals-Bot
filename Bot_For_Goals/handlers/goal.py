@@ -68,15 +68,15 @@ async def mark_goal_delete(update, context):
                 await update.message.reply_text(
                     GOAL_DELETED_SUCCESS.format(goal_id=goal_id),
                     parse_mode='HTML',
-                    reply_markup=back_to_goals_menu
+                    reply_markup=back_to_start
                 )
             else:
                 await update.message.reply_text(
                     ERROR_GOAL_NOT_FOUND.format(goal_id=goal_id),
-                    reply_markup=back_to_goals_menu
+                    reply_markup=back_to_start
                 )
         else:
-            await update.message.reply_text(ERROR_ID_NOT_FOUND, reply_markup=back_to_goals_menu)
+            await update.message.reply_text(ERROR_ID_NOT_FOUND, reply_markup=back_to_start)
     except Exception as e:
         print(f"Ошибка при удалении цели: {e}")
-        await update.message.reply_text(ERROR_GENERIC, reply_markup=back_to_goals_menu)
+        await update.message.reply_text(ERROR_GENERIC, reply_markup=back_to_start)
