@@ -110,8 +110,6 @@ def delete_task(task_id):
     except Exception as e:
         print(f"Ошибка при удалении цели: {e}")
         return False
-def get_goal_by_id(goal_id):
-    return session.query(Goal).filter(Goal.id == goal_id).first()
 
 def get_statistics():
     try:
