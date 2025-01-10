@@ -39,23 +39,23 @@ async def mark_goal_complete(update, context):
                 await update.message.reply_text(
                     GOAL_COMPLETED_SUCCESS.format(goal_id=goal_id),
                     parse_mode='HTML',
-                    reply_markup=back_to_start
+                    reply_markup=back_to_goals_menu
                 )
             elif result == "already_completed":
                 await update.message.reply_text(
                     ERROR_GOAL_ALREADY_COMPLETED.format(goal_id=goal_id),
-                    reply_markup=back_to_start
+                    reply_markup=back_to_goals_menu
                 )
             else:
                 await update.message.reply_text(
                     ERROR_GOAL_NOT_FOUND.format(goal_id=goal_id),
-                    reply_markup=back_to_start
+                    reply_markup=back_to_goals_menu
                 )
         else:
-            await update.message.reply_text(ERROR_ID_NOT_FOUND, reply_markup=back_to_start)
+            await update.message.reply_text(ERROR_ID_NOT_FOUND, reply_markup=back_to_goals_menu)
     except Exception as e:
         print(f"Ошибка при выполнении цели: {e}")
-        await update.message.reply_text(ERROR_GENERIC, reply_markup=back_to_start)
+        await update.message.reply_text(ERROR_GENERIC, reply_markup=back_to_goals_menu)
 
 async def mark_goal_delete(update, context):
     user_input = update.message.text.strip()

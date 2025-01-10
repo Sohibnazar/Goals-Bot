@@ -1,4 +1,4 @@
-from telegram.ext import ConversationHandler,ContextTypes
+from telegram.ext import ContextTypes
 from Bot_For_Goals.database.database import  get_goals,get_statistics,check_goal_exists
 from Bot_For_Goals.logs.logger import logger
 from datetime import datetime
@@ -46,7 +46,6 @@ async def button(update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode='HTML',
             reply_markup=back_to_start
         )
-        return 'ADDING_GOAL'
 
     elif data == 'add_task':
         user_id = query.from_user.id
@@ -57,7 +56,6 @@ async def button(update, context: ContextTypes.DEFAULT_TYPE):
                 parse_mode='HTML',
                 reply_markup=back_to_start
             )
-            return 'ADDING_TASK'
 
         else:
             await query.edit_message_text(
@@ -65,7 +63,6 @@ async def button(update, context: ContextTypes.DEFAULT_TYPE):
                 parse_mode='HTML',
                 reply_markup=back_to_start
             )
-            return 'WAITING_FOR_GOAL'
 
     elif data == 'back_to_start':
         await query.edit_message_text(
@@ -73,7 +70,6 @@ async def button(update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode='HTML',
             reply_markup=main_menu
         )
-        return ConversationHandler.END
 
     elif data == 'view_goals':
         try:
@@ -110,10 +106,8 @@ async def button(update, context: ContextTypes.DEFAULT_TYPE):
                     parse_mode='HTML',
                     reply_markup=back_to_start
                 )
-            return ConversationHandler.END
         except Exception as e:
             await query.edit_message_text(f"{ERROR_MESSAGE}{str(e)}")
-            return ConversationHandler.END
 
     elif data == 'complete_goal':
         quote = random.choice(QUOTES_COMPLETED_GOAL)
@@ -122,7 +116,6 @@ async def button(update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode='HTML',
             reply_markup=back_to_goals_menu
         )
-        return 'COMPLETING_ID'
 
     elif data == 'delete_goal':
         quote = random.choice(QUOTES_DELETE)
@@ -131,7 +124,6 @@ async def button(update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode='HTML',
             reply_markup=back_to_goals_menu
         )
-        return 'DELITING_ID'
 
     elif data == 'view_tasks':
         quote = random.choice(QUOTES_VIEW_TASKS)
@@ -140,7 +132,6 @@ async def button(update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode='HTML',
             reply_markup=back_to_goals_menu
         )
-        return 'TASKS_ID'
 
     elif data == 'complete_task':
         quote = random.choice(QUOTES_COMPLETE_TASK)
@@ -149,7 +140,6 @@ async def button(update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode='HTML',
             reply_markup=back_to_goals_menu
         )
-        return 'COMPLETING_ID'
 
     elif data == 'delete_task':
         quote = random.choice(QUOTES_DELETE)
@@ -158,7 +148,6 @@ async def button(update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode='HTML',
             reply_markup=back_to_goals_menu
         )
-        return 'DELITING_ID'
 
     elif data == 'view_stats':
         quote = random.choice(QUOTES_STATS)

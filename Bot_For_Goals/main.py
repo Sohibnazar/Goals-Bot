@@ -1,13 +1,17 @@
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, MessageHandler, filters
-from handlers.task import get_tasks_for_goal,mark_task_complete,view_task,mark_task_delete
-from handlers.goal import get_goal_data, mark_goal_complete,mark_goal_delete
+import sys
+sys.path.append('C:/Users/sohibnazar.a/PycharmProjects/Goals_bot')
+from Bot_For_Goals.handlers.task import get_tasks_for_goal,mark_task_complete,view_task,mark_task_delete
+from Bot_For_Goals.handlers.goal import get_goal_data, mark_goal_complete,mark_goal_delete
 from Bot_For_Goals.handlers.messages import  ERROR_UNKNOWN_COMMAND
 from Bot_For_Goals.handlers.keyboards import back_to_start
 from Bot_For_Goals.handlers.scheduler import scheduler
+from Bot_For_Goals.handlers.button import button
+from Bot_For_Goals.handlers.start import start
 from Bot_For_Goals.logs.logger import logger
 from config.config import TOKEN
-from handlers.start import start
-from handlers.button import button
+
+
 
 async def check_message(update, context):
     user = update.message.from_user
